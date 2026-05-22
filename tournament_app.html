@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sporting Kampenhout - U10 Pfingstcup 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2B3E7F;
+            --secondary-color: #1A2558;
+            --accent-color: #F4D03F;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-bg: #f4f4f4;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            position: relative;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 2px;
+        }
+
+        .header h1 {
+            font-size: 1.95em;
+            margin-bottom: 8px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: 60px;
+            display: inline-block;
+        }
+
+        .header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: white;
+            border-bottom: 2px solid var(--secondary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .nav-tabs::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .nav-tabs::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+
+        .nav-tab {
+            padding: 12px 15px;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-tab.active {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+            background-color: #f9f9f9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 100%;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--secondary-color);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .card strong {
+            color: var(--primary-color);
+        }
+
+        /* Match Card */
+        .match-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 8px 16px rgba(43, 62, 127, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .match-card::before {
+            content: '⚽';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 80px;
+            opacity: 0.08;
+            transition: all 0.3s ease;
+        }
+
+        .match-card:hover {
+            box-shadow: 0 12px 24px rgba(43, 62, 127, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .match-card:hover::before {
+            top: -10px;
+            right: -10px;
+            opacity: 0.12;
+        }
+
+        .match-time {
+            font-size: 2.2em;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .match-opponent {
+            font-size: 1.3em;
+            color: white;
+            font-weight: 700;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .match-info {
+            font-size: 0.95em;
+            color: rgba(255,255,255,0.9);
+            margin: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            margin-left: 30px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--secondary-color);
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            border: 3px solid white;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1em;
+        }
+
+        .timeline-content {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.95em;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 5px solid;
+            font-weight: 500;
+        }
+
+        .alert-danger {
+            background-color: #ffe4e1;
+            border-left-color: #e74c3c;
+            color: #c0392b;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            border-left-color: #f39c12;
+            color: #856404;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-left-color: #2ecc71;
+            color: #155724;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        /* Restaurant List */
+        .restaurant-item {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border-left: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .restaurant-item:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .restaurant-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border-radius: 14px 14px 0 0;
+        }
+
+        .restaurant-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .restaurant-item p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 4px 0;
+            line-height: 1.4;
+        }
+
+        .restaurant-item p:first-of-type {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .restaurant-type {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #E8C319 100%);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            font-weight: 700;
+            width: fit-content;
+            box-shadow: 0 2px 8px rgba(244, 208, 63, 0.2);
+        }
+
+        /* Contact Info */
+        .contact-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .contact-card strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-card a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            opacity: 0.8;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .grid-item .value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .grid-item .label {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-right: 12px;
+            accent-color: var(--secondary-color);
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            flex: 1;
+            color: #333;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + label {
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        /* CTA Button */
+        .btn-primary {
+            display: block;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #E8C319 100%);
+            color: var(--primary-color);
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin: 16px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 16px rgba(244, 208, 63, 0.3);
+            letter-spacing: 0.5px;
+            min-height: 56px;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 24px rgba(244, 208, 63, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            background: linear-gradient(135deg, #E8C319 0%, var(--accent-color) 100%);
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(244, 208, 63, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-tab {
+                padding: 10px 12px;
+                font-size: 0.85em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-tabs, .footer {
+                display: none;
+            }
+
+            .section {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #f0f0f0;
+            }
+
+            .card, .contact-card, .restaurant-item, .checklist-item, .header, .nav-tabs {
+                background: #2a2a2a;
+                color: #f0f0f0;
+            }
+
+            .card p, .card strong, .restaurant-item p, .timeline-content {
+                color: #e0e0e0;
+            }
+
+            .match-card {
+                background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚽ Sporting Kampenhout</h1>
+        <p>U10 Pfingstcup 2026 - 23-24 mei</p>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('overview')">📋 Overzicht</button>
+        <button class="nav-tab" onclick="showTab('schedule')">🎯 Schema</button>
+        <button class="nav-tab" onclick="showTab('fields')">🏟️ Velden</button>
+        <button class="nav-tab" onclick="showTab('timeline')">⏰ Ochtend</button>
+        <button class="nav-tab" onclick="showTab('match-procedures')">⚽ Wedstrijdregels</button>
+        <button class="nav-tab" onclick="showTab('checklist')">✅ Checklist</button>
+        <button class="nav-tab" onclick="showTab('afternoon')">🎉 Middag</button>
+        <button class="nav-tab" onclick="showTab('restaurants')">🍽️ Eten</button>
+        <button class="nav-tab" onclick="showTab('info')">ℹ️ Info</button>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+
+            <!-- OVERVIEW SECTION -->
+            <div id="overview" class="section active">
+                <div class="alert alert-warning">
+                    <strong>🚨 KRITIEK:</strong> Zorg NU voor paspoorten! Team kan niet spelen zonder!
+                </div>
+
+                <div class="alert alert-danger">
+                    <strong>⏰ ONTBIJT:</strong> Zaterdag 06:45 | <strong>VERZAMELEN LOBBY:</strong> 07:25
+                </div>
+
+                <div class="card">
+                    <h3>Toernooigegevens</h3>
+                    <p><strong>Datum:</strong> Zaterdag-Zondag, 23-24 mei 2026</p>
+                    <p><strong>Team:</strong> Sporting Kampenhout (België) 🇧🇪</p>
+                    <p><strong>Groep:</strong> A - Voorronde</p>
+                    <p><strong>Locatie:</strong> SC Union Nettetal, Duitsland</p>
+                    <p><strong>Van hotel:</strong> 15 km, ~20 minuten rijden</p>
+                </div>
+
+                <div class="card">
+                    <h3>Schema zaterdag</h3>
+                    <p><strong>3 Ochtendwedstrijden:</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>09:00 vs PAOK Saloniki (Griekenland)</li>
+                        <li>09:36 vs DSV 04 Lierenfeld</li>
+                        <li>10:12 vs BV de Graafschap blue (Nederland)</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Pauze:</strong> ~10:50-12:30</p>
+                    <p><strong>Middag:</strong> Groepswedstrijden (zie Velden tab)</p>
+                    <p style="margin-top: 10px;"><strong>Zondag & later:</strong> Vervolgschema in Velden tab</p>
+                </div>
+
+                <div class="card">
+                    <h3>Hotel</h3>
+                    <p><strong>Leonardo Hotel Mönchengladbach</strong></p>
+                    <p>Rabinerstraße 1, 41061 Mönchengladbach</p>
+                    <p>📞 +49 2161 58 3700</p>
+                </div>
+
+                <div class="grid">
+                    <div class="grid-item">
+                        <div class="label">Eerste wedstrijd</div>
+                        <div class="value">09:00</div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="label">Inschrijven voor</div>
+                        <div class="value">08:15</div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="label">Vertrek</div>
+                        <div class="value">07:30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FIELDS SECTION -->
+            <div id="fields" class="section">
+                <div class="alert alert-info">
+                    <strong>🏟️ Tornooi Velden & Spelschema Link</strong>
+                </div>
+
+                <div class="card">
+                    <h3>🏟️ SC Union Nettetal - Speelvelden</h3>
+                    <p><strong>Lobberischer Str. 69A</strong></p>
+                    <p>41334 Nettetal, Duitsland</p>
+                    <p style="margin-top: 10px;"><strong>Totaal velden:</strong> Meerdere trainingsvelden beschikbaar</p>
+                    <p><strong>Parkeergelegenheid:</strong> Ruim parkeerterrein ter plaatse</p>
+                    <p><strong>Faciliteiten:</strong> Toiletten, drinkwater, eetmogelijkheden</p>
+                </div>
+
+                <div class="card">
+                    <h3>📋 ZATERDAG - Sporting Kampenhout (Groep A)</h3>
+                    <p style="margin-bottom: 15px;"><strong>Bekijk hier het zaterdag speelschema voor groep A:</strong></p>
+                    <a href="https://www.meinturnierplan.de/showit.php?id=0x184oq57z" target="_blank" class="btn-primary" style="text-align: center; text-decoration: none; display: block;">
+                        📅 ZATERDAG - Groep A Schema
+                    </a>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        Op deze website voor zaterdag:
+                    </p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>Sporting Kampenhout wedstrijden (09:00, 09:36, 10:12)</li>
+                        <li>Groep A voorronde wedstrijden</li>
+                        <li>Welk veld uw wedstrijd op plaatsvindt</li>
+                        <li>Tussenstand groep A volgen</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Groepswedstrijden / Andere Groepen (Zaterdag)</h3>
+                    <p style="margin-bottom: 15px;"><strong>Bekijk hier andere groepswedstrijden op zaterdag:</strong></p>
+                    <a href="https://www.meinturnierplan.de/showit.php?id=0xg8519g3s" target="_blank" class="btn-primary" style="text-align: center; text-decoration: none; display: block;">
+                        📅 Klik hier voor alle groepen (Zaterdag)
+                    </a>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        Op deze website kunt u zien:
+                    </p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>Alle groepswedstrijden op zaterdag</li>
+                        <li>Wedstrijden van andere groepen</li>
+                        <li>Volledige speelschema zaterdag</li>
+                        <li>Velden en times voor alle wedstrijden</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>ℹ️ Twee Schema's op Zaterdag</h3>
+                    <p><strong>Groep A (Sporting Kampenhout):</strong></p>
+                    <p>Eerste link - voor uw wedstrijden (09:00, 09:36, 10:12)</p>
+                    <p style="margin-top: 10px;"><strong>Andere Groepen:</strong></p>
+                    <p>Tweede link - voor het volledige zaterdag speelschema</p>
+                    <p style="margin-top: 15px;"><strong>⚠️ Let op:</strong> Het speelschema kan ter plaatse nog veranderen! Controleer op de dag zelf bij het informatiebord.</p>
+                </div>
+            </div>
+
+            <!-- SCHEDULE SECTION -->
+            <div id="schedule" class="section">
+                <div class="alert alert-info">
+                    <strong>📅 Wedstrijden - Zaterdag 23 mei</strong>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-time">Wedstrijd #1 - 09:00</div>
+                    <div class="match-opponent">vs PAOK Saloniki 🇬🇷</div>
+                    <div class="match-info">Groep A - Voorronde</div>
+                    <div class="match-info">🏟️ Veld: 2</div>
+                    <div class="match-info">Duur: ~25-30 minuten</div>
+                    <div class="match-info">Eerste wedstrijd - OP TIJD AANWEZIG (08:15)!</div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-time">Wedstrijd #2 - 09:36</div>
+                    <div class="match-opponent">vs DSV 04 Lierenfeld</div>
+                    <div class="match-info">Groep A - Voorronde</div>
+                    <div class="match-info">🏟️ Veld: 2</div>
+                    <div class="match-info">Duur: ~25-30 minuten</div>
+                    <div class="match-info">~18 minuten pauze na vorige wedstrijd</div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-time">Wedstrijd #3 - 10:12</div>
+                    <div class="match-opponent">vs BV de Graafschap blauw 🇳🇱</div>
+                    <div class="match-info">Groep A - Voorronde</div>
+                    <div class="match-info">🏟️ Veld: 2 (Game 18)</div>
+                    <div class="match-info">Duur: ~25-30 minuten</div>
+                    <div class="match-info">Laatste wedstrijd voor lunch!</div>
+                </div>
+
+                <div class="card">
+                    <h3>Na wedstrijd #3</h3>
+                    <p><strong>Lunchpauze:</strong> ~10:50-12:30</p>
+                    <p>Locatie: Lunchruimte op toernooilocatie Nettetal</p>
+                    <p>Licht eten, hydratie, rust</p>
+                    <p style="margin-top: 10px;"><strong>Middag:</strong> Groepswedstrijden (tijd TBD)</p>
+                    <p>Check het informatiebord na wedstrijd #3</p>
+                </div>
+            </div>
+
+            <!-- TIMELINE SECTION -->
+            <div id="timeline" class="section">
+                <div class="alert alert-warning">
+                    <strong>⏰ Zaterdag ochtend - Minute voor minute</strong>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">06:45</div>
+                        <div class="timeline-content">🍽️ ONTBIJT BEGINT
+                        <br>Licht ontbijt, energieopbouw</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:25</div>
+                        <div class="timeline-content">🏨 VERZAMELEN IN LOBBY
+                        <br>Iedereen klaar voor vertrek</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:25-07:30</div>
+                        <div class="timeline-content">✅ LAATSTE CONTROLES
+                        <br>Paspoorten in tas, water, GPS, materiaal, outfit klaar</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:30</div>
+                        <div class="timeline-content">🚗 VERTREK NAAR LOCATIE
+                        <br>SC Union Nettetal (20 min rijden)</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:05-08:15</div>
+                        <div class="timeline-content">🅿️ AANKOMST & PARKEREN
+                        <br>Materiaal uitladen</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">07:55-08:15</div>
+                        <div class="timeline-content">📋 INSCHRIJVING
+                        <br><strong>DEADLINE: 08:15! Niet te laat!</strong></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:30-09:00</div>
+                        <div class="timeline-content">⚽ WARMING UP
+                        <br>Rekken, balwerk, mentale voorbereiding</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:00</div>
+                        <div class="timeline-content">🎯 WEDSTRIJD #1 START
+                        <br>vs PAOK Saloniki</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:30-09:35</div>
+                        <div class="timeline-content">💧 HYDRATATIEPAUZE
+                        <br>Water na wedstrijd & rust</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:36</div>
+                        <div class="timeline-content">🎯 WEDSTRIJD #2 START
+                        <br>vs DSV 04 Lierenfeld</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:06-10:11</div>
+                        <div class="timeline-content">💧 HYDRATATIEPAUZE #2
+                        <br>Water & feedback</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:12</div>
+                        <div class="timeline-content">🎯 WEDSTRIJD #3 START
+                        <br>vs BV de Graafschap blauw (Nederland)</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:42-10:50</div>
+                        <div class="timeline-content">💧 HYDRATIE & AFKOELEN
+                        <br>Voorronde afgerond!</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:50-12:30</div>
+                        <div class="timeline-content">🍽️ LUNCHPAUZE
+                        <br>Rust, hydratie, licht eten</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:30+</div>
+                        <div class="timeline-content">⚽ MIDDAGWEDSTRIJDEN
+                        <br>Groepswedstrijden (tijd TBD)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATCH PROCEDURES SECTION -->
+            <div id="match-procedures" class="section">
+                <div class="alert alert-danger">
+                    <strong>🚨 KRITIEK: STRAK SCHEMA!</strong><br>
+                    Slechts 1.5 MINUTEN tussen wedstrijden! Te laat = 0:5 verlies!
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">⏰ VOOR ELKE WEDSTRIJD START</h3>
+                <div class="card">
+                    <p><strong>Timing:</strong> Aanwezig 5 minuten VOOR start wedstrijd</p>
+                    <p><strong>⏱️ Snelle checklist:</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>✅ Bevestig juiste veld en tijd</li>
+                        <li>✅ Opstelling klaar (7 spelers)</li>
+                        <li>✅ Alle spelers met scheenbeschermers & schoenen</li>
+                        <li>✅ Luister naar scheidsrechter instructies</li>
+                        <li>✅ Korte positieve teamtalk (max 1 minuut)</li>
+                        <li>✅ Klaar bij fluit scheidsrechter</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #c0392b;"><strong>⚠️ Te laat = 0:5 verlies!</strong></p>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">🏁 DIRECT NA WEDSTRIJD</h3>
+                <div class="card">
+                    <p><strong>⏱️ Max 1.5 MINUTEN tot volgende wedstrijd!</strong></p>
+                    <p><strong>Seconden 0-15:</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>✅ Alle spelers van veld halen</li>
+                        <li>✅ Koppelingen (11 spelers aanwezig?)</li>
+                        <li>✅ Korte felicitatie (win/verlies/gelijkspel)</li>
+                        <li>✅ ONMIDDELLIJK DRINKEN - waterflessen</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Seconden 15-45:</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>✅ Snel afkoelen (licht wandelen)</li>
+                        <li>✅ Feedback (positief)</li>
+                        <li>✅ Controleer op blessures</li>
+                        <li>✅ Droge sokken/handdoeken</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Seconden 45-90:</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>✅ Weet volgende veld</li>
+                        <li>✅ Volgende opstelling klaar</li>
+                        <li>✅ Team bij elkaar houden</li>
+                        <li>✅ Naar volgende veld</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">🔄 TUSSEN WEDSTRIJDEN (Snel!)</h3>
+                <div class="card">
+                    <p><strong>Voorbeeld timeline:</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>09:00 - 09:05: Spelers verzamelen & drinken</li>
+                        <li>09:05 - 09:10: Herstel & uitrusting check</li>
+                        <li>09:10 - 09:15: Voorbereiding & opstelling</li>
+                        <li>09:15 - 09:30: Naar volgende veld</li>
+                        <li>09:30 - 09:35: Vroeg daar, posities in</li>
+                        <li><strong>09:36: KLAAR!</strong></li>
+                    </ul>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">📊 TIJDENS DE WEDSTRIJD</h3>
+                <div class="card">
+                    <p><strong>Wel doen:</strong> ✓ Wedstrijd volgen, eerlijk aanmoedigen, wisselingen beheren, veiligheid checken</p>
+                    <p><strong>Niet doen:</strong> ✗ Op veld lopen, met scheidsrechter discussiëren, bal aanraken, zijlijn verlaten</p>
+                    <p style="margin-top: 10px;"><strong>Blijf positief - Fair play is belangrijk!</strong></p>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">⚽ TOERNOOIFORMAT</h3>
+                <div class="card">
+                    <p><strong>7-tegen-7 (6 veldspelers + 1 doelman)</strong></p>
+                    <ul style="margin-left: 15px; margin-top: 10px;">
+                        <li>Speelduur: ~25-30 minuten</li>
+                        <li>GEEN buitenspel</li>
+                        <li>Terugspeelregel VAN KRACHT</li>
+                        <li>Onbeperkt wisselen</li>
+                        <li>3 punten winst / 1 punt gelijkspel / 0 punten verlies</li>
+                        <li><strong>Fair play is centraal!</strong></li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>🔑 BELANGRIJK:</strong><br>
+                    • Kijk schema vooraf in<br>
+                    • Timing is ALLES<br>
+                    • Hydratie na elke wedstrijd<br>
+                    • Houd team samen<br>
+                    • Snelle overstappen tussen velden<br>
+                    • Fair play boven winnen!
+                </div>
+            </div>
+
+            <!-- CHECKLIST SECTION -->
+            <div id="checklist" class="section">
+                <div class="alert alert-info">
+                    <strong>📝 Voorbereiding checklist</strong>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">Vrijdagavond</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c1"><label for="c1">ALLE paspoorten verzamelen (VERPLICHT!)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c2"><label for="c2">2-3 complete outfits per speler klaarleggen</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c3"><label for="c3">Waterflessen inpakken (meerdere!)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c4"><label for="c4">Snacks inpakken (licht voedsel)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c5"><label for="c5">Zonnebrandcrème, handdoeken, EHBO inpakken</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c6"><label for="c6">Alarmtijden instellen (06:30!)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c7"><label for="c7">Weerbericht controleren</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c8"><label for="c8">GPS adres invoeren: Lobberischer Str. 69A, 41334 Nettetal</label>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">Zaterdagochtend</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c9"><label for="c9">Licht ontbijt (niet zwaar!)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c10"><label for="c10">Alle spelers volledig uitgerust om 07:25</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c11"><label for="c11">Alle paspoorten in ÉÉN tas</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c12"><label for="c12">Hotel lobby 07:25 / Vertrek 07:30</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c13"><label for="c13">Koppelingen voordat we vertrekken</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c14"><label for="c14">Om 07:50 ter plaatse (20 min rijden)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c15"><label for="c15">Inschrijven voor 08:15</label>
+                </div>
+            </div>
+
+            <!-- AFTERNOON SECTION -->
+            <div id="afternoon" class="section">
+                <div class="alert alert-success">
+                    <strong>🎉 Toernooi eindigt ~13:00-14:00</strong>
+                </div>
+
+                <div class="card">
+                    <h3>Middagprogramma</h3>
+                    <p><strong>13:00-14:00:</strong> Toernooi afgelopen</p>
+                    <p><strong>14:00-17:00:</strong> Mönchengladbach verkennen</p>
+                    <p><strong>17:00-17:30:</strong> Terug naar hotel, douche, omkleden</p>
+                    <p><strong>17:30-19:00:</strong> Diner</p>
+                    <p><strong>20:00-21:30:</strong> POKAL FINALE LIVE! 📺</p>
+                    <p><strong>21:30+:</strong> Terug naar hotel, bed</p>
+                </div>
+
+                <div class="card">
+                    <h3>⭐ Moet-zien in Mönchengladbach</h3>
+                    <p>⚽ <strong>Borussia-Park Stadion Tour</strong> - Thuis van Borussia MG (54.057 plaatsen)</p>
+                    <p>🎨 <strong>Abteiberg Museum</strong> - Hedendaags kunstmuseum (€6 entree)</p>
+                    <p>🌳 <strong>Bunter Garten</strong> - Botanische tuin & arboretum (perfect om te ontspannen)</p>
+                    <p>🏰 <strong>Schloss Rheydt</strong> - Historisch kasteel met mooie kunst</p>
+                    <p>🏰 <strong>Schloss Wickrath</strong> - Mooi kasteel buiten stad</p>
+                </div>
+
+                <div class="card">
+                    <h3>🍷 Sportkroegen voor Pokal Finale (20:00)</h3>
+                    <p><strong>Beste optie 1:</strong> Hotelrestaurant bar (van tevoren bellen: +49 2161 58 3700)</p>
+                    <p><strong>Beste optie 2:</strong> Traditionele bierkroegen in centrum</p>
+                    <p><strong>Beste optie 3:</strong> Sportrestaurants bij Borussia-Park stadion</p>
+                    <p><strong>Tip:</strong> Bel restaurants om 17:00 om te bevestigen dat ze de wedstrijd uitzenden!</p>
+                </div>
+
+                <div class="card">
+                    <h3>🚗 Daguitstap Düsseldorf (30 km verderop)</h3>
+                    <p>🏢 <strong>Rhine Tower</strong> - Iconische toren met observatiedek & restaurant</p>
+                    <p>🛍️ <strong>Königsallee</strong> - Luxe winkelstraat met designerswinkels</p>
+                    <p>🏰 <strong>Schloss Benrath</strong> - Barokpalet met mooie tuinen</p>
+                    <p>🌸 <strong>Japanse Tuin</strong> - Mooie zentuun (gratis entree)</p>
+                    <p>Afstand: 30 km / 30 minuten met auto</p>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>🏆 DFB POKAL FINALE - Dezelfde dag!</strong><br>
+                    FC Bayern München vs VfB Stuttgart<br>
+                    Zaterdag 23 mei 2026 om 20:00<br>
+                    Perfect teamuitje! 🎉
+                </div>
+            </div>
+
+            <!-- RESTAURANTS SECTION -->
+            <div id="restaurants" class="section">
+                <div class="alert alert-info">
+                    <strong>🍽️ Gezinsrestaurants in Mönchengladbach</strong>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">🍕 Italiaans (Kinderen houden ervan!)</h3>
+                <div class="restaurant-item">
+                    <h4>Pizzeria Napoli</h4>
+                    <p><strong>Specialiteit:</strong> Pizza's uit houtoven</p>
+                    <p>Traditionele Italiaanse pizzeria, grote porties, gezinsvriendelijk</p>
+                    <p><strong>Kinderen:</strong> Menu beschikbaar, snelle service</p>
+                    <p><strong>Prijs:</strong> €€ (Gemiddeld) | <strong>Tip:</strong> Kom vroeg (geen reservering)</p>
+                    <span class="restaurant-type">Casual</span>
+                </div>
+                <div class="restaurant-item">
+                    <h4>Trattoria di Casa</h4>
+                    <p><strong>Specialiteit:</strong> Zelfgemaakte pasta & authentiek Italiaans</p>
+                    <p>Gezellige sfeer, vriendelijk personeel, kindermenu</p>
+                    <p><strong>Kinderen:</strong> Gezinsvriendelijk, goed voor groepen</p>
+                    <p><strong>Prijs:</strong> €€ (Gemiddeld) | <strong>Tip:</strong> Goed voor teamuitje</p>
+                    <span class="restaurant-type">Casual</span>
+                </div>
+                <div class="restaurant-item">
+                    <h4>Ristorante Roma</h4>
+                    <p><strong>Specialiteit:</strong> Klassiek Italiaans fijndineren</p>
+                    <p>Elegant maar ontspannen, mooie sfeer</p>
+                    <p><strong>Geschikt voor:</strong> Bijzondere viering</p>
+                    <p><strong>Prijs:</strong> €€€ (Luxe) | <strong>Tip:</strong> Reservering aanbevolen</p>
+                    <span class="restaurant-type">Luxe</span>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">🥗 Duitse specialiteiten</h3>
+                <div class="restaurant-item">
+                    <h4>Schnitzelhaus</h4>
+                    <p><strong>Specialiteit:</strong> Beroemde schnitzel (varken & kip)</p>
+                    <p>Klassiek Duits restaurant met patat & traditionele beilagen</p>
+                    <p>Royale porties, gezinsgeoriënteerd, gezellige sfeer</p>
+                    <p><strong>Prijs:</strong> €€ (Gemiddeld) | <strong>Kinderen:</strong> Houden van schnitzel!</p>
+                    <span class="restaurant-type">Traditioneel</span>
+                </div>
+                <div class="restaurant-item">
+                    <h4>Alt-Mönchengladbach</h4>
+                    <p><strong>Specialiteit:</strong> Traditionele Rijnlandse keuken</p>
+                    <p>Historisch gebouw met sfeer van vroeger</p>
+                    <p>Authentieke Duitse ervaring, grote porties</p>
+                    <p><strong>Prijs:</strong> €€ (Gemiddeld) | <strong>Tip:</strong> Geweldig voor culturele ervaring</p>
+                    <span class="restaurant-type">Traditioneel</span>
+                </div>
+                <div class="restaurant-item">
+                    <h4>Brauereigasthof zum Spiegel</h4>
+                    <p><strong>Specialiteit:</strong> Lokaal bier & Duits eten</p>
+                    <p>Brouwerijrestaurant met levendige sfeer, traditionele bierkroeg</p>
+                    <p>Perfect voor groepen, lokaal favoriete</p>
+                    <p><strong>Prijs:</strong> €€ (Gemiddeld) | <strong>Tip:</strong> Perfect voor teamfeest!</p>
+                    <span class="restaurant-type">Bierkroeg</span>
+                </div>
+                <div class="restaurant-item">
+                    <h4>Currywurst Kraampjes</h4>
+                    <p><strong>Specialiteit:</strong> Pikante worst met currysaus & patat</p>
+                    <p>Snelle Duitse straatvoeding, lekker en casual</p>
+                    <p>Perfect voor snelle lunch of snack</p>
+                    <p><strong>Prijs:</strong> € (Voordelig) | <strong>Kinderen:</strong> Houden ervan (niet te pittig!)</p>
+                    <span class="restaurant-type">Snelle hap</span>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">🍔 Casual internationaal</h3>
+                <div class="restaurant-item">
+                    <h4>Burger King & McDonald's</h4>
+                    <p>Meerdere locaties in de stad</p>
+                    <p>Betrouwbaar, vertrouwd, snelle service</p>
+                    <span class="restaurant-type">Fast Food</span>
+                </div>
+                <div class="restaurant-item">
+                    <h4>Aziatische restaurants (Thai, Vietnamees)</h4>
+                    <p>Veel hebben milde opties voor kinderen</p>
+                    <p>Goed voor afwisseling</p>
+                    <span class="restaurant-type">Internationaal</span>
+                </div>
+
+                <h3 style="margin: 20px 0 15px 0; color: var(--primary-color);">🏨 Hotelrestaurant</h3>
+                <div class="restaurant-item">
+                    <h4>Leonardo Hotel Restaurant</h4>
+                    <p>In hotel, gemakkelijk, geen reis nodig</p>
+                    <p>Gezinsvriendelijk, vertrouwde omgeving</p>
+                    <p>Goed als kinderen moe zijn</p>
+                    <span class="restaurant-type">Gemakkelijk</span>
+                </div>
+            </div>
+
+            <!-- INFO SECTION -->
+            <div id="info" class="section">
+                <div class="alert alert-info">
+                    <strong>ℹ️ Belangrijke informatie</strong>
+                </div>
+
+                <div class="card">
+                    <h3>📞 Noodcontacten</h3>
+                    <p><strong>Duitse noodlijn:</strong> 112</p>
+                    <p><strong>Leonardo Hotel:</strong> +49 2161 58 3700</p>
+                    <p><strong>Toernooiorganisatie:</strong> +49 8282 8906550</p>
+                    <p><strong>Mobiel:</strong> +49 176 3496 6096</p>
+                </div>
+
+                <div class="card">
+                    <h3>📍 Locatiegegevens</h3>
+                    <p><strong>SC Union Nettetal</strong></p>
+                    <p>Lobberischer Str. 69A</p>
+                    <p>41334 Nettetal, Duitsland</p>
+                    <p>Afstand van hotel: 15 km</p>
+                    <p>Rijtijd: ~20 minuten</p>
+                </div>
+
+                <div class="card">
+                    <h3>💰 Wat meebrengen</h3>
+                    <p>✓ Paspoorten voor ALLE spelers (VERPLICHT!)</p>
+                    <p>✓ Contant geld: €20-30 per gezin (ingang + maaltijden)</p>
+                    <p>✓ Waterflessen (meerdere!)</p>
+                    <p>✓ Voetbaltenues (2-3 per speler)</p>
+                    <p>✓ Zonnebrandcrème, handdoeken, EHBO kit</p>
+                </div>
+
+                <div class="card">
+                    <h3>⚽ Toernooiregels</h3>
+                    <p>✓ 7-tegen-7 format (6 veldspelers + 1 doelman)</p>
+                    <p>✓ GEEN buitenspel</p>
+                    <p>✓ Terugspeelregel VAN KRACHT</p>
+                    <p>✓ 3 punten winst, 1 gelijkspel</p>
+                    <p>✓ Onbeperkt wisselen</p>
+                    <p>✓ Fair play is centraal!</p>
+                </div>
+
+                <div class="alert alert-danger">
+                    <strong>🚨 Kritieke herinneringen:</strong><br>
+                    ✗ GEEN paspoorten = Kan niet spelen!<br>
+                    ✗ Te laat inschrijven = Verlies (0:5)!<br>
+                    ✗ ALLEEN CONTANT = Geen kaartbetaling!<br>
+                    ✗ HOTEL LOBBY = 07:00 START!
+                </div>
+
+                <button class="btn-primary" onclick="printApp()">🖨️ Deze gids afdrukken</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Sporting Kampenhout - U10 Pfingstcup 2026</p>
+        <p style="margin-top: 10px; opacity: 0.8;">23-24 mei 2026 | Mönchengladbach, Duitsland</p>
+        <p style="margin-top: 10px; opacity: 0.8;">⚽ Veel succes op het toernooi! ⚽</p>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function printApp() {
+            window.print();
+        }
+
+        // Save checklist state
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem('checklist_' + checkbox.id, checkbox.checked);
+            });
+
+            // Load saved state
+            if (localStorage.getItem('checklist_' + checkbox.id)) {
+                checkbox.checked = JSON.parse(localStorage.getItem('checklist_' + checkbox.id));
+            }
+        });
+
+        // Install as PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript,self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>e.waitUntil(clients.claim()));');
+            });
+        }
+    </script>
+</body>
+</html>
